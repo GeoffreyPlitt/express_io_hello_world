@@ -1,0 +1,21 @@
+<html>
+<head>
+    <script src='/socket.io/socket.io.js'></script>
+    <script>
+        socket = io.connect(window.location.origin, {
+            //'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling'],
+            //'transports': ['jsonp-polling'],
+            'transports': ['xhr-polling'],
+            'connect timeout': 5000,
+            'reconnect': true
+        });
+        socket.emit('ping', {'param1': 'value1'});
+        console.log('sent ping')
+        socket.on('pong', function(){
+            console.log('got pong:', arguments[0].result);
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
