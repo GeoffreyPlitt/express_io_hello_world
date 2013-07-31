@@ -1,0 +1,14 @@
+{
+  "name": "hello_world_express_io",
+  "scripts": {
+    "start" : "node_modules/coffee-script/bin/coffee -w app.coffee"
+  },
+  "version": "0.0.1",
+  "private": true,
+  "readmeFilename": "README.md",
+  "dependencies":
+    {
+    "coffee-script": "1.6.2",
+    "express.io": "1.1.12"
+    }
+}
