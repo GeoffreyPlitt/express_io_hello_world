@@ -21,3 +21,9 @@ app.configure ->
     req.io.emit 'pong',
       result: req.data
     console.log 'sent pong'
+
+  app.io.route "ping2", (req) ->
+    console.log 'got ping2'
+    req.io.emit 'pong2',
+      result: req.data
+    console.log 'sent pong2'

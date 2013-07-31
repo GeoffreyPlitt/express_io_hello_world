@@ -2,27 +2,24 @@
 <head>
     <script src='/socket.io/socket.io.js'></script>
     <script>
-        USE_WEBSOCKETS = true;
 
-        if(USE_WEBSOCKETS) {
-            socket = io.connect(window.location.origin, {'transports': ['websocket']});
-            // socket = io.connect(window.location.origin, {
-            //     //'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling'],
-            //     //'transports': ['jsonp-polling'],
-            //     'transports': ['xhr-polling'],
-            //     'connect timeout': 5000,
-            //     'reconnect': true
-            // });
-        } else {
-            socket = io.connect(window.location.origin, {'transports': ['xhr-polling']});
+        function websocket_test(){
+            web_socket = io.connect(window.location.origin, {'transports': ['websocket']});
+            web_socket.emit('ping', {'param1': 'SUCCESS'});
+            console.log('sent websocket ping')
+            web_socket.on('pong', function(){ alert('got websocket pong: ' + arguments[0].result.param1); });
         }
-        socket.emit('ping', {'param1': 'value1'});
-        console.log('sent ping')
-        socket.on('pong', function(){
-            console.log('got pong:', arguments[0].result);
-        });
+
+        function polling_test(){
+            polling_socket = io.connect(window.location.origin, {'transports': ['xhr-polling']});
+            polling_socket.emit('ping2', {'param1': 'SUCCESS2'});
+            console.log('sent polling ping2')
+            polling_socket.on('pong2', function(){ alert('got polling pong2: ' + arguments[0].result.param1); });
+        }
     </script>
 </head>
 <body>
+  <button onclick="websocket_test()">websocket test</button>
+  <button onclick="polling_test()">polling test</button>
 </body>
 </html>
