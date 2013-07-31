@@ -2,13 +2,20 @@
 <head>
     <script src='/socket.io/socket.io.js'></script>
     <script>
-        socket = io.connect(window.location.origin, {
-            //'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling'],
-            //'transports': ['jsonp-polling'],
-            'transports': ['xhr-polling'],
-            'connect timeout': 5000,
-            'reconnect': true
-        });
+        USE_WEBSOCKETS = true;
+
+        if(USE_WEBSOCKETS) {
+            socket = io.connect(window.location.origin, {'transports': ['websocket']});
+            // socket = io.connect(window.location.origin, {
+            //     //'transports': ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling'],
+            //     //'transports': ['jsonp-polling'],
+            //     'transports': ['xhr-polling'],
+            //     'connect timeout': 5000,
+            //     'reconnect': true
+            // });
+        } else {
+            socket = io.connect(window.location.origin, {'transports': ['xhr-polling']});
+        }
         socket.emit('ping', {'param1': 'value1'});
         console.log('sent ping')
         socket.on('pong', function(){

@@ -8,9 +8,6 @@ app.http().io()
 app.listen APP_PORT
 
 app.configure ->
-  #app.use express.bodyParser()
-  #app.use express.methodOverride()
-
   app.configure 'development', ->
     app.locals.pretty = true
 
